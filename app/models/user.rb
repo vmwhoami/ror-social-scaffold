@@ -17,14 +17,21 @@ class User < ApplicationRecord
   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
 
 
-  def pending_f
+  def pending_f_req
     self.friendships.select{|f| !f.confirmed }
   end
-    
-  def friends
-    self.friendships.select{|f| f.confirmed }
+      
+  def recieving_f_req
+    self.inverse_friendships.map{|f| f if !f.confirmed}.compact
   end
   
-  
+  def self.friends
+     self.friendships + self.inverse_friendships
+  end
+
+
+  def befriend(user)
+    
+  end
 
 end
