@@ -1,14 +1,14 @@
 
 
 User.create!(name:"Vitalie",email:"vmwhoami@gmail.com",password:"password")
-User.create!(name:"Olea",email:"olea@gmail.com",password:"password")
-User.create!(name:"Adam",email:"adam@gmail.com",password:"password")
+User.create!(name:"Mahmoud",email:"mahmoud@gmail.com",password:"password")
+User.create!(name:"Ariel",email:"ariel@gmail.com",password:"password")
 User.create!(name:"Galina",email:"galina@gmail.com",password:"password")
 User.create!(name:"Filip",email:"filip@gmail.com",password:"password")
 User.create!(name:"Filipash",email:"filipash@gmail.com",password:"password")
 User.create!(name:"Dima",email:"dima@gmail.com",password:"password")
 
-10.times do |f|
+50.times do |f|
   User.create!(name:"user_#{f}",email:"user#{f}@gmail.com",password:"password")
 end
 puts "-"*200
@@ -16,7 +16,7 @@ puts "Users created"
 
 
 
-12.times do |ids|
+40.times do |ids|
   ids+=1
   Post.create!(
     user:User.find_by(id:ids),
@@ -29,7 +29,7 @@ puts "-"*200
 puts "Posts created"
 
 
-7.times do |ids|
+30.times do |ids|
   ids+=1
   Comment.create!(
     user:User.find_by(id:ids),
@@ -38,7 +38,7 @@ puts "Posts created"
     )
 end
 
-7.times do |ids|
+38.times do |ids|
   ids+=1
   Comment.create!(
     user:User.first,
