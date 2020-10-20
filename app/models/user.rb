@@ -27,6 +27,13 @@ class User < ApplicationRecord
  def outgoing_friend_requests
   friendships.select{|f| f.confirmed == false}
  end
+
+ def befriend(user)
+  friend = incoming_friend_requests.find{|f| f.user == user}
+  friend.confirmed = true
+  friend.save!
+  
+ end
  
 
 end
