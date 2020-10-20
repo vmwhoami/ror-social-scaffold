@@ -11,27 +11,22 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
 
- 
- 
   has_many :friendships
-  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
+  has_many :invitations, class_name:"Friendship", foreign_key: "friend_id"
 
 
-  def pending_f_req
-    self.friendships.select{|f| !f.confirmed }
-  end
-      
-  def recieving_f_req
-    self.inverse_friendships.map{|f| f if !f.confirmed}.compact
-  end
+
+ def friends
+  (invitations.select{|f| f.confirmed == true}) + (friendships.select{|f| f.confirmed == true})
+ end
   
-  def self.friends
-     self.friendships + self.inverse_friendships
-  end
-
-
-  def befriend(user)
-    
-  end
+ def incoming_friend_requests
+  invitations.select{|f| f.confirmed == false}
+ end
+ 
+ def outgoing_friend_requests
+  friendships.select{|f| f.confirmed == false}
+ end
+ 
 
 end
