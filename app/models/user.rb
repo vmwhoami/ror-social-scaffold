@@ -12,28 +12,28 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
 
   has_many :friendships
-  has_many :invitations, class_name:"Friendship", foreign_key: "friend_id"
+  has_many :incoming_invitations, class_name:"Friendship", foreign_key: "friend_id"
 
+   #These are the friendships
+  has_many :incoming_friendship_requests,->{where confirmed: false},class_name:"Friendship", foreign_key: "friend_id"
+    #These are the users
+  has_many :pending_friends, through: :incoming_friendship_requests, source: :user
 
+  #These are the friendships
+  has_many :confirmed_initiated_friendships,->{where confirmed: true},class_name:"Friendship", foreign_key: "user_id"
+  #These are the users
+  has_many :initiated_friends, through: :confirmed_initiated_friendships, source: :user
+ 
 
+  
+  #These are the friendships
+  has_many :confirmed_accepted_friendships,->{where confirmed: true},class_name:"Friendship", foreign_key: "friend_id"
+  #These are the users
+  has_many :confirmed_friends, through: :confirmed_accepted_friendships, source: :user
+ 
  def friends
-  (invitations.select{|f| f.confirmed == true}) + (friendships.select{|f| f.confirmed == true})
- end
-  
- def incoming_friend_requests
-  invitations.select{|f| f.confirmed == false}
- end
- 
- def outgoing_friend_requests
-  friendships.select{|f| f.confirmed == false}
+       initiated_friends +  confirmed_friends
  end
 
- def befriend(user)
-  friend = incoming_friend_requests.find{|f| f.user == user}
-  friend.confirmed = true
-  friend.save!
-  
- end
- 
 
 end
