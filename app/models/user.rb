@@ -19,20 +19,20 @@ class User < ApplicationRecord
     #These are the users
   has_many :pending_friends, through: :incoming_friendship_requests, source: :user
 
+
+
   #These are the friendships
   has_many :confirmed_initiated_friendships,->{where confirmed: true},class_name:"Friendship", foreign_key: "user_id"
   #These are the users
-  has_many :initiated_friends, through: :confirmed_initiated_friendships, source: :user
+  has_many :initiated_friends, through: :confirmed_initiated_friendships, source: :friend
  
-
-  
   #These are the friendships
   has_many :confirmed_accepted_friendships,->{where confirmed: true},class_name:"Friendship", foreign_key: "friend_id"
   #These are the users
   has_many :confirmed_friends, through: :confirmed_accepted_friendships, source: :user
  
  def friends
-       initiated_friends + confirmed_friends
+      initiated_friends + confirmed_friends 
  end
 
  def accept_friend(user)

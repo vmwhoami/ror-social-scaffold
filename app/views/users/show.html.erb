@@ -1,9 +1,22 @@
 <section class="user-section">
+<div class="card">
+<h2>Friend requests</h2>
+<% @user.pending_friends.each do |user| %>
+<p class="post-comments"><%= user.name %></p>
+<% end %>
+<h3>Friends</h3>
+ <% @user.friends.each do |user| %>
+<p class="post-comments"><%= user.name %></p>
+<% end %>
+</div>
   <h2><%= "Name: #{@user.name}" %></h2>
   <article class="timeline">
     <h3>Recent posts:</h3>
     <ul class="posts">
       <%= render @posts %>
     </ul>
+    <%= link_to('Add Friend', add_path(person_id: @user.id), method: :post)  %>
+         
+      <%= current_user.email %>
   </article>
 </section>
