@@ -19,20 +19,29 @@ RSpec.describe User, type: :model do
      @u_1.friendships.create(friend:@u_2)
    end
 
-   it "should have outgoing friend requests" do
-     expect(@u_1.outgoing_friend_requests.count).to eq(1) 
-   end
-
-   
    it "should have incoming friend requests" do
-    expect(@u_2.incoming_friend_requests.count).to eq(1) 
-  end
+     expect(@u_2.pending_friends.count).to eq(1) 
+   end
 
   it "should accept friend requests" do
     @u_2.accept_friend(@u_1)
-    expect(@u_1.friends.include?(@u_2)).to eq(true)
+    expect(@u_1.friends.count).to eq(1)
   end
    
+  it "Friends increase in the opite direction" do
+    @u_2.accept_friend(@u_1)
+    expect(@u_2.friends.count).to eq(1)
+  end
+  it "Should be able to reject friends" do
+    @u_2.reject(@u_1)
+    expect(@u_2.pending_friends.count).to eq(0)
+  end
+   
+  it "Should be able to tell if a friend is a friend" do
+    @u_2.accept_friend(@u_1)
+    expect(@u_2.friend?(@u_1)).to eq(true)
+  end
+
  end
  
  
