@@ -1,7 +1,9 @@
-<li>
+<% if current_user != user %>
+  <li>
   Name: <%= user.name %>
   <span class="profile-link">
     <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
-    <%= link_to('Add Friend', add_path(person_id: user.id), method: :post, class: 'profile-link')   %>
+    <%= add_friend_btn(user) %>
   </span>
 </li>
+<% end %>

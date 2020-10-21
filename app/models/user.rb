@@ -20,12 +20,22 @@ class User < ApplicationRecord
   has_many :pending_friends, through: :incoming_friendship_requests, source: :user
 
 
+#######################
+# Unconfirmed sent requests
+
+  #These are the friendships
+  has_many :unconfirmed_initiated_friendships,->{where confirmed: false},class_name:"Friendship", foreign_key: "user_id"
+  #These are the users
+  has_many :unconfirmed_friends, through: :unconfirmed_initiated_friendships, source: :friend
+  
+##################
 
   #These are the friendships
   has_many :confirmed_initiated_friendships,->{where confirmed: true},class_name:"Friendship", foreign_key: "user_id"
   #These are the users
   has_many :initiated_friends, through: :confirmed_initiated_friendships, source: :friend
  
+
   #These are the friendships
   has_many :confirmed_accepted_friendships,->{where confirmed: true},class_name:"Friendship", foreign_key: "friend_id"
   #These are the users
@@ -48,6 +58,10 @@ class User < ApplicationRecord
 
  def friend?(user)
    friends.include?(user)
+ end
+
+ def sent_req?(user)
+  unconfirmed_friends.include?(user)
  end
 
 end

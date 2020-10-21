@@ -15,4 +15,11 @@ module ApplicationHelper
       link_to('Like!', post_likes_path(post_id: post.id), method: :post)
     end
   end
+ 
+  def add_friend_btn(user)
+   if !current_user.friend?(user) && !current_user.sent_req?(user)
+    link_to('Add Friend', add_path(person_id: user.id),method: :post, class: 'profile-link') 
+   end
+  end
+
 end

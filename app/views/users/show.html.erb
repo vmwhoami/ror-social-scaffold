@@ -2,11 +2,11 @@
 <div class="card">
 <h2>Friend requests</h2>
 <% @user.pending_friends.each do |user| %>
-<p class="post-comments"><%= user.name %></p>
+<p class="post-comments"><%= user.email %></p>
 <% end %>
 <h3>Friends</h3>
  <% @user.friends.each do |user| %>
-<p class="post-comments"><%= user.name %></p>
+<p class="post-comments"><%= user.email %></p>
 <% end %>
 </div>
   <h2><%= "Name: #{@user.name}" %></h2>
