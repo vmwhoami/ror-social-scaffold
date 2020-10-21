@@ -35,5 +35,19 @@ class User < ApplicationRecord
        initiated_friends +  confirmed_friends
  end
 
+ def accept_friend(user)
+   u = incoming_friendship_requests.find_by_user_id(user)
+   u.confirmed = true
+   u.save
+ end
+
+ def reject(user)
+		friendship = incoming_friendship_requests.find_by_user_id(user)
+		friendship.destroy
+ end
+
+ def friend?(user)
+   friends.include?(user)
+ end
 
 end
