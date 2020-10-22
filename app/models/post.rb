@@ -7,4 +7,10 @@ class Post < ApplicationRecord
   scope :ordered_by_most_recent, -> { order(created_at: :desc) }
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
+
+
+  def self.user_friends_posts(user)
+    ids = user.friends.pluck(:id) << user.id
+    self.where(user_id: ids).order(created_at: :desc)
+  end
 end
