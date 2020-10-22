@@ -8,6 +8,7 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { maximum: 20 }
 
   has_many :posts
+
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
 
@@ -44,6 +45,7 @@ class User < ApplicationRecord
  def friends
       initiated_friends + confirmed_friends 
  end
+
 
  def accept_friend(user)
    u = incoming_friendship_requests.find_by_user_id(user)
