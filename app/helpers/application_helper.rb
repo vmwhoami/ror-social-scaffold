@@ -17,11 +17,11 @@ module ApplicationHelper
   end
 
   def add_friend_btn(user)
-    if !current_user.friend?(user) && !current_user.sent_req?(user)
-      link_to('Add Friend', add_path(person_id: user.id),
-              method: :post,
-              class: 'add_friend_btn')
-    end
+    return unless !current_user.friend?(user) && !current_user.sent_req?(user)
+
+    link_to('Add Friend', add_path(person_id: user.id),
+            method: :post,
+            class: 'add_friend_btn')
   end
 
   def add_friend_show(user)
@@ -41,10 +41,10 @@ module ApplicationHelper
   end
 
   def reject(user, usr)
-    if current_user == user
-      link_to 'reject', destroy_path(delete_id: usr.id),
-              method: :delete,
-              class: 'reject_friend_btn'
-    end
+    return unless current_user == user
+
+    link_to 'reject', destroy_path(delete_id: usr.id),
+            method: :delete,
+            class: 'reject_friend_btn'
   end
 end
