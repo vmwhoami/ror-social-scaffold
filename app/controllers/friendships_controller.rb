@@ -21,8 +21,11 @@ class FriendshipsController < ApplicationController
   def destroy
     @friendship = current_user.incoming_friendship_requests.find_by_user_id(params[:delete_id])
     if @friendship.destroy
-      redirect_to user_path(current_user)
+      redirect_to user_path(current_user), notice: "Friend request rejected"
+    else
+      render user_path(current_user), notice: "Could not delete friend request"
     end
   end
+  
  
 end

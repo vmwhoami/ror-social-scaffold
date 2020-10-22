@@ -22,4 +22,26 @@ module ApplicationHelper
    end
   end
 
+  def friends_header(user,content,tag,method)
+    if current_user == user && method.any?
+   " <#{tag}>#{content}</#{tag}>".html_safe
+    end
+  end
+def users_email(user)
+  unless current_user == user
+    "<p class='post-comments'>#{user.email}</p>".html_safe
+
+  end
+end
+  def accept(user)
+    unless current_user == user
+    link_to 'accept', accept_path(inviter_id: user.id),method: :put, class: 'add_friend_btn'
+    end
+  end
+
+ 
+  def reject(user)
+    unless current_user == user
+      link_to 'reject', destroy_path(delete_id: user.id),method: :delete, class: 'reject_friend_btn'    end
+  end
 end

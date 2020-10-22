@@ -1,18 +1,21 @@
 <section class="user-section">
 <div class="card">
-<h2>Friend requests</h2>
-<% @user.pending_friends.each do |user| %>
-<div class="buttons">
-  <p class="post-comments"><%= user.email %></p>
-  <%= link_to('accept', accept_path(inviter_id: user.id),method: :put, class: 'add_friend_btn')  %>
-  <%= link_to('reject', destroy_path(delete_id: user.id),method: :delete, class: 'reject_friend_btn')  %>
-</div>
-<% end %>
-<h3>Friends</h3>
- <% @user.friends.each do |user| %>
-<p class="post-comments"><%= user.email %></p>
-<% end %>
-</div>
+  <%= friends_header(@user,"Pending friends","h2",@user.pending_friends ) %>
+  <% @user.pending_friends.each do |user| %>
+    <div class="buttons">
+      <%= users_email(user) %>
+      <%= accept(user)  %>
+      <%= reject(user) %>
+    </div>
+  <% end %>
+
+ <%= friends_header(@user,"Friends","h3",@user.friends) %>
+  <% @user.friends.each do |user| %>
+  <%= users_email(user) %>
+  <% end %>
+  </div>
+
+
   <h2><%= "Name: #{@user.name}" %></h2>
   <article class="timeline">
     <h3>Recent posts:</h3>
