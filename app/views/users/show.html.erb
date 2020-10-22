@@ -2,7 +2,11 @@
 <div class="card">
 <h2>Friend requests</h2>
 <% @user.pending_friends.each do |user| %>
-<p class="post-comments"><%= user.email %></p>
+<div class="buttons">
+  <p class="post-comments"><%= user.email %></p>
+  <%= link_to('accept', accept_path(inviter_id: user.id),method: :put, class: 'add_friend_btn')  %>
+  <%= link_to('reject', destroy_path(delete_id: user.id),method: :delete, class: 'reject_friend_btn')  %>
+</div>
 <% end %>
 <h3>Friends</h3>
  <% @user.friends.each do |user| %>
@@ -15,8 +19,7 @@
     <ul class="posts">
       <%= render @posts %>
     </ul>
-    <%= link_to('Add Friend', add_path(person_id: @user.id), method: :post)  %>
+    <%= add_friend_btn(@user)  %>
          
-      <%= current_user.email %>
   </article>
 </section>

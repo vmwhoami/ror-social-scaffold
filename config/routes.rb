@@ -11,5 +11,6 @@ Rails.application.routes.draw do
   end
 
   post "add",to:"friendships#add"
-  
+  put "accept",to: "friendships#accept"
+  delete "destroy",to: "friendships#destroy"
 end

@@ -18,7 +18,7 @@ module ApplicationHelper
  
   def add_friend_btn(user)
    if !current_user.friend?(user) && !current_user.sent_req?(user)
-    link_to('Add Friend', add_path(person_id: user.id),method: :post, class: 'profile-link') 
+    link_to('Add Friend', add_path(person_id: user.id),method: :post, class: 'add_friend_btn') 
    end
   end
 

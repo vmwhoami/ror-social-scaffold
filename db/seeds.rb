@@ -72,20 +72,15 @@ puts "Likes created"
 6.times do |ids|
   ids+=2
   Friendship.create!(
-    user:User.first,
-     friend:User.find_by(id:ids)
+    user:User.find_by(id:ids),
+     friend:User.first
      )
 end
 
 puts "-"*200
 puts "Friendships created"
 
-4.times do |ids|
-  ids+=1
-  f = Friendship.find(ids)
-  f.confirmed = true
-  f.save
-end
+ 
 
 
 puts "-"*200
