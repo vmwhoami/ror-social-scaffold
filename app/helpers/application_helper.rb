@@ -17,31 +17,34 @@ module ApplicationHelper
   end
  
   def add_friend_btn(user)
-   if !current_user.friend?(user) && !current_user.sent_req?(user)
+   if !current_user.friend?(user) && !current_user.sent_req?(user) 
     link_to('Add Friend', add_path(person_id: user.id),method: :post, class: 'add_friend_btn') 
    end
   end
 
-  def friends_header(user,content,tag,method)
+  def add_friend_show(user)
+    add_friend_btn(user) if current_user != user
+  end
+
+  def friends_header(user,content,tag,method=nil)
     if current_user == user && method.any?
    " <#{tag}>#{content}</#{tag}>".html_safe
     end
   end
-def users_email(user)
-  unless current_user == user
-    "<p class='post-comments'>#{user.email}</p>".html_safe
-
+def users_email(user,u)
+  if current_user == user
+    "<p class='post-comments'>#{u.email}</p>".html_safe
   end
 end
-  def accept(user)
-    unless current_user == user
-    link_to 'accept', accept_path(inviter_id: user.id),method: :put, class: 'add_friend_btn'
+  def accept(user,usr)
+    if current_user == user
+    link_to 'accept', accept_path(inviter_id: usr.id),method: :put, class: 'add_friend_btn'
     end
   end
 
  
-  def reject(user)
-    unless current_user == user
-      link_to 'reject', destroy_path(delete_id: user.id),method: :delete, class: 'reject_friend_btn'    end
+  def reject(user,usr)
+    if current_user == user
+      link_to 'reject', destroy_path(delete_id: usr.id),method: :delete, class: 'reject_friend_btn'    end
   end
 end

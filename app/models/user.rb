@@ -42,7 +42,7 @@ class User < ApplicationRecord
   has_many :confirmed_friends, through: :confirmed_accepted_friendships, source: :user
  
  def friends
-      initiated_friends && confirmed_friends 
+      initiated_friends + confirmed_friends 
  end
 
  def accept_friend(user)

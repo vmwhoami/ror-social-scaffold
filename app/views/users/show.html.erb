@@ -1,17 +1,18 @@
 <section class="user-section">
 <div class="card">
   <%= friends_header(@user,"Pending friends","h2",@user.pending_friends ) %>
-  <% @user.pending_friends.each do |user| %>
+  <% @user.pending_friends.each do |u| %>
     <div class="buttons">
-      <%= users_email(user) %>
-      <%= accept(user)  %>
-      <%= reject(user) %>
+      <%= users_email(@user,u) %>
+      <%= accept(@user,u)  %>
+      <%= reject(@user,u) %>
     </div>
   <% end %>
 
  <%= friends_header(@user,"Friends","h3",@user.friends) %>
-  <% @user.friends.each do |user| %>
-  <%= users_email(user) %>
+  
+  <% @user.friends.each do |friend| %>
+  <%= users_email(@user,friend) %>
   <% end %>
   </div>
 
@@ -22,7 +23,7 @@
     <ul class="posts">
       <%= render @posts %>
     </ul>
-    <%= add_friend_btn(@user)  %>
+    <%= add_friend_show(@user)  %>
          
   </article>
 </section>
