@@ -15,36 +15,36 @@ module ApplicationHelper
       link_to('Like!', post_likes_path(post_id: post.id), method: :post)
     end
   end
- 
+
   def add_friend_btn(user)
-   if !current_user.friend?(user) && !current_user.sent_req?(user) 
-    link_to('Add Friend', add_path(person_id: user.id),method: :post, class: 'add_friend_btn') 
-   end
+    if !current_user.friend?(user) && !current_user.sent_req?(user)
+      link_to('Add Friend', add_path(person_id: user.id),
+              method: :post,
+              class: 'add_friend_btn')
+    end
   end
 
   def add_friend_show(user)
     add_friend_btn(user) if current_user != user
   end
 
-  def friends_header(user,content,tag,method=nil)
-    if current_user == user && method.any?
-   " <#{tag}>#{content}</#{tag}>".html_safe
-    end
-  end
-def users_email(user,u)
-  if current_user == user
-    "<p class='post-comments'>#{u.email}</p>".html_safe
-  end
-end
-  def accept(user,usr)
-    if current_user == user
-    link_to 'accept', accept_path(inviter_id: usr.id),method: :put, class: 'add_friend_btn'
-    end
+  def friends_header(user, content, tag, method = nil)
+    " <#{tag}>#{content}</#{tag}>".html_safe if current_user == user && method.any?
   end
 
- 
-  def reject(user,usr)
+  def users_email(user, usr)
+    "<p class='post-comments'>#{usr.email}</p>".html_safe if current_user == user
+  end
+
+  def accept(user, usr)
+    link_to 'accept', accept_path(inviter_id: usr.id), method: :put, class: 'add_friend_btn' if current_user == user
+  end
+
+  def reject(user, usr)
     if current_user == user
-      link_to 'reject', destroy_path(delete_id: usr.id),method: :delete, class: 'reject_friend_btn'    end
+      link_to 'reject', destroy_path(delete_id: usr.id),
+              method: :delete,
+              class: 'reject_friend_btn'
+    end
   end
 end
