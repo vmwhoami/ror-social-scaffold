@@ -9,7 +9,7 @@
 
 ## Live Demo
 
-- 
+- [Live Demo on Heroku](https://vmwhoami-social.herokuapp.com/)
 
 
 ## Getting Started
@@ -65,13 +65,14 @@ Open `http://localhost:3000/` in your browser.
 
 > Tests will be added by Microverse students. There are no tests for initial features in order to make sure that students write all tests from scratch.
 
-### Deployment
 
-TBA
+## Author
 
-## Authors
+**Vitalie Melnic**
 
-TBA
+- Github: [github](https://github.com/vmwhoami)
+- Twitter: [LinkedIn](https://www.linkedin.com/in/vitalie-melnic-5802198a/)
+- Linkedin: [twitter](https://twitter.com/vmwhoami)
 
 ## 🤝 Contributing
 
