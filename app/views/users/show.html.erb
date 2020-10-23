@@ -1,9 +1,29 @@
 <section class="user-section">
+<div class="card">
+  <%= friends_header(@user,"Pending friends","h2",@user.pending_friends ) %>
+  <% @user.pending_friends.each do |u| %>
+    <div class="buttons">
+      <%= users_email(@user,u) %>
+      <%= accept(@user,u)  %>
+      <%= reject(@user,u) %>
+    </div>
+  <% end %>
+
+ <%= friends_header(@user,"Friends","h3",@user.friends) %>
+  
+  <% @user.friends.each do |friend| %>
+  <%= users_email(@user,friend) %>
+  <% end %>
+  </div>
+
+
   <h2><%= "Name: #{@user.name}" %></h2>
   <article class="timeline">
     <h3>Recent posts:</h3>
     <ul class="posts">
       <%= render @posts %>
     </ul>
+    <%= add_friend_show(@user)  %>
+         
   </article>
 </section>

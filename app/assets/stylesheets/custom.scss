@@ -20,6 +20,13 @@ body {
   font-weight: 400;
 }
 
+.my{
+  margin: 0 10px;
+}
+.mx{
+  margin: 10px 0;
+}
+
 h1,
 h2,
 h3 {
@@ -126,6 +133,7 @@ a {
     }
   }
 
+ 
   .btn-primary {
     width: 100%;
   }
@@ -345,5 +353,36 @@ form {
   .users-section,
   .user-section {
     width: 50%;
+  }
+}
+
+.buttons{
+  width:400px;
+  display: flex;
+  justify-content: space-between;
+}
+.add_friend_btn{
+  justify-self: center;
+  display: inline-block;
+  background-color:$primary-color-dark ;
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+  
+    &:hover{
+      color: black;
+      background-color: $primary-color-light;
+    }
+}
+
+.reject_friend_btn{
+  display: inline-block;
+  background-color:red;
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+  &:hover{
+    color: black;
+    background-color:rgb(255, 162, 162);
   }
 }
