@@ -18,10 +18,15 @@ module ApplicationHelper
 
   def add_friend_btn(user)
     return unless !current_user.friend?(user) && !current_user.sent_req?(user)
+    return if current_user == user
 
-    link_to('Add Friend', add_path(person_id: user.id),
-            method: :post,
-            class: 'add_friend_btn')
+    if user.sent_req?(current_user)
+      nil
+    else
+      link_to('Add Friend', add_path(person_id: user.id),
+              method: :post,
+              class: 'add_friend_btn')
+    end
   end
 
   def add_friend_show(user)
